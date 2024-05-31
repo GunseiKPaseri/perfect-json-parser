@@ -1,0 +1,78 @@
+{
+  "version": "3",
+  "packages": {
+    "specifiers": {
+      "jsr:@std/assert@^0.225.3": "jsr:@std/assert@0.225.3",
+      "jsr:@std/internal@^1.0.0": "jsr:@std/internal@1.0.0",
+      "jsr:@std/testing@^0.224.0": "jsr:@std/testing@0.224.0",
+      "npm:chevrotain": "npm:chevrotain@11.0.3",
+      "npm:chevrotain@^11.0.3": "npm:chevrotain@11.0.3"
+    },
+    "jsr": {
+      "@std/assert@0.225.3": {
+        "integrity": "b3c2847aecf6955b50644cdb9cf072004ea3d1998dd7579fc0acb99dbb23bd4f",
+        "dependencies": [
+          "jsr:@std/internal@^1.0.0"
+        ]
+      },
+      "@std/internal@1.0.0": {
+        "integrity": "ac6a6dfebf838582c4b4f61a6907374e27e05bedb6ce276e0f1608fe84e7cd9a"
+      },
+      "@std/testing@0.224.0": {
+        "integrity": "371b8a929aa7132240d5dd766a439be8f780ef5c176ab194e0bcab72370c761e"
+      }
+    },
+    "npm": {
+      "@chevrotain/cst-dts-gen@11.0.3": {
+        "integrity": "sha512-BvIKpRLeS/8UbfxXxgC33xOumsacaeCKAjAeLyOn7Pcp95HiRbrpl14S+9vaZLolnbssPIUuiUd8IvgkRyt6NQ==",
+        "dependencies": {
+          "@chevrotain/gast": "@chevrotain/gast@11.0.3",
+          "@chevrotain/types": "@chevrotain/types@11.0.3",
+          "lodash-es": "lodash-es@4.17.21"
+        }
+      },
+      "@chevrotain/gast@11.0.3": {
+        "integrity": "sha512-+qNfcoNk70PyS/uxmj3li5NiECO+2YKZZQMbmjTqRI3Qchu8Hig/Q9vgkHpI3alNjr7M+a2St5pw5w5F6NL5/Q==",
+        "dependencies": {
+          "@chevrotain/types": "@chevrotain/types@11.0.3",
+          "lodash-es": "lodash-es@4.17.21"
+        }
+      },
+      "@chevrotain/regexp-to-ast@11.0.3": {
+        "integrity": "sha512-1fMHaBZxLFvWI067AVbGJav1eRY7N8DDvYCTwGBiE/ytKBgP8azTdgyrKyWZ9Mfh09eHWb5PgTSO8wi7U824RA==",
+        "dependencies": {}
+      },
+      "@chevrotain/types@11.0.3": {
+        "integrity": "sha512-gsiM3G8b58kZC2HaWR50gu6Y1440cHiJ+i3JUvcp/35JchYejb2+5MVeJK0iKThYpAa/P2PYFV4hoi44HD+aHQ==",
+        "dependencies": {}
+      },
+      "@chevrotain/utils@11.0.3": {
+        "integrity": "sha512-YslZMgtJUyuMbZ+aKvfF3x1f5liK4mWNxghFRv7jqRR9C3R3fAOGTTKvxXDa2Y1s9zSbcpuO0cAxDYsc9SrXoQ==",
+        "dependencies": {}
+      },
+      "chevrotain@11.0.3": {
+        "integrity": "sha512-ci2iJH6LeIkvP9eJW6gpueU8cnZhv85ELY8w8WiFtNjMHA5ad6pQLaJo9mEly/9qUyCpvqX8/POVUTf18/HFdw==",
+        "dependencies": {
+          "@chevrotain/cst-dts-gen": "@chevrotain/cst-dts-gen@11.0.3",
+          "@chevrotain/gast": "@chevrotain/gast@11.0.3",
+          "@chevrotain/regexp-to-ast": "@chevrotain/regexp-to-ast@11.0.3",
+          "@chevrotain/types": "@chevrotain/types@11.0.3",
+          "@chevrotain/utils": "@chevrotain/utils@11.0.3",
+          "lodash-es": "lodash-es@4.17.21"
+        }
+      },
+      "lodash-es@4.17.21": {
+        "integrity": "sha512-mKnC+QJ9pWVzv+C4/U3rRsHapFfHvQFoFB92e52xeyGMcX6/OlIl78je1u8vePzYZSkkogMPJ2yjxxsb89cxyw==",
+        "dependencies": {}
+      }
+    }
+  },
+  "remote": {},
+  "workspace": {
+    "dependencies": [
+      "jsr:@std/assert@^0.225.3",
+      "jsr:@std/testing@^0.224.0",
+      "npm:chevrotain@^11.0.3"
+    ]
+  }
+}
