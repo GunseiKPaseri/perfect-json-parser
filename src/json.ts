@@ -1,15 +1,17 @@
 import {
   type JSONInternal,
   type JSONInternalArray,
-  JsonLexer,
   type JSONInternalObject,
+  JsonLexer,
   JsonParser,
   type JsonPrimitive,
 } from "./json_parser.ts";
 
 export type JSONDataInnerObj = JSONInternal;
 
-function stringifyJson(jsonobj: JSONDataInnerObj | JSONInternal["value"]): string {
+function stringifyJson(
+  jsonobj: JSONDataInnerObj | JSONInternal["value"],
+): string {
   if (typeof jsonobj === "object" && jsonobj !== null) {
     switch (jsonobj.type) {
       case "root": {
@@ -33,12 +35,14 @@ function stringifyJson(jsonobj: JSONDataInnerObj | JSONInternal["value"]): strin
       }
       case "object": {
         return `{${
-          jsonobj.item.map((item) => item.type === 'empty' ? item.space :
-            `${item.space.beforeKey ?? ""}${stringifyJson(item.key)}${
-              item.space.afterKey ?? ""
-            }:${item.space.beforeValue ?? ""}${stringifyJson(item.value)}${
-              item.space.afterValue ?? ""
-            }`
+          jsonobj.item.map((item) =>
+            item.type === "empty"
+              ? item.space
+              : `${item.space.beforeKey ?? ""}${stringifyJson(item.key)}${
+                item.space.afterKey ?? ""
+              }:${item.space.beforeValue ?? ""}${stringifyJson(item.value)}${
+                item.space.afterValue ?? ""
+              }`
           )
         }}`;
       }
@@ -76,7 +80,9 @@ function generateJsonObj(
       }
       case "object": {
         return Object.fromEntries(
-          jsonobj.item.map((item) => item.type === 'pair' ? [item.key, item.value] : []),
+          jsonobj.item.map((item) =>
+            item.type === "pair" ? [item.key, item.value] : []
+          ),
         );
       }
     }
@@ -119,7 +125,7 @@ function fromJsonObj(obj: JSONValue): JSONInternal["value"] {
 
 function findObj(parent: JSONInternalObject, key: string | number) {
   for (const child of parent.item) {
-    if (child.type === 'empty') continue;
+    if (child.type === "empty") continue;
     if (child.key === key) {
       return child;
     }

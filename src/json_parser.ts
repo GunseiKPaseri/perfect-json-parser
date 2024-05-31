@@ -56,7 +56,10 @@ export type JSONInternalArray = {
   item: JSONInternalArrayItem[];
 };
 
-export type JSONInternalValue = JsonPrimitive | JSONInternalObject | JSONInternalArray;
+export type JSONInternalValue =
+  | JsonPrimitive
+  | JSONInternalObject
+  | JSONInternalArray;
 
 export type JSONInternalObjectItem = {
   type: "pair";
@@ -68,7 +71,7 @@ export type JSONInternalObjectItem = {
     beforeValue: string;
     afterValue: string;
   };
-}| { type: "empty"; space: string };
+} | { type: "empty"; space: string };
 
 export type JSONInternalObject = {
   type: "object";
@@ -118,30 +121,35 @@ export class JsonParser extends EmbeddedActionsParser {
     return { type: "object" as const, item };
   });
 
-  public objectItem: () => JSONInternalObjectItem = this.RULE("objectItem", () => {
-    const beforeKey = this.SUBRULE(this.ignoredText);
-    
-    const objPair = this.OPTION(() => {
-      const lit = this.CONSUME(StringLiteral);
-      const afterKey = this.SUBRULE2(this.ignoredText);
-  
-      this.CONSUME(Colon);
-  
-      const beforeValue = this.SUBRULE3(this.ignoredText);
-      const value = this.SUBRULE(this.value);
-      const afterValue = this.SUBRULE4(this.ignoredText);
-  
-      // an empty json key is not valid, use "BAD_KEY" instead
-      const key = lit.isInsertedInRecovery ? "BAD_KEY" : lit.image.slice(1, -1);
-      return {
-        type: "pair" as const,
-        key,
-        value,
-        space: { beforeKey, afterKey, beforeValue, afterValue },
-      };
-    })
-    return objPair ?? {type: 'empty' as const, space: beforeKey}
-  });
+  public objectItem: () => JSONInternalObjectItem = this.RULE(
+    "objectItem",
+    () => {
+      const beforeKey = this.SUBRULE(this.ignoredText);
+
+      const objPair = this.OPTION(() => {
+        const lit = this.CONSUME(StringLiteral);
+        const afterKey = this.SUBRULE2(this.ignoredText);
+
+        this.CONSUME(Colon);
+
+        const beforeValue = this.SUBRULE3(this.ignoredText);
+        const value = this.SUBRULE(this.value);
+        const afterValue = this.SUBRULE4(this.ignoredText);
+
+        // an empty json key is not valid, use "BAD_KEY" instead
+        const key = lit.isInsertedInRecovery
+          ? "BAD_KEY"
+          : lit.image.slice(1, -1);
+        return {
+          type: "pair" as const,
+          key,
+          value,
+          space: { beforeKey, afterKey, beforeValue, afterValue },
+        };
+      });
+      return objPair ?? { type: "empty" as const, space: beforeKey };
+    },
+  );
 
   public array: () => JSONInternalArray = this.RULE("array", () => {
     const item: JSONInternalArrayItem[] = [];

@@ -2,11 +2,12 @@
 
 A parser that allows editing while _maintaining the structure_ of json.
 
-* support 
-* support order retenation ( minimal change )
+- support
+- support order retenation ( minimal change )
 
 > [!WARNING]
-> * unsupport comment
+>
+> - unsupport comment
 
 ## Usage
 

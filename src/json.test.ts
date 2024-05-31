@@ -93,7 +93,7 @@ describe("success json stringify", () => {
 const tinyTestcase: [string, string][] = [
   ["simple json object", '{"hoge":"fuga","foo":"bar"}'],
   ["simple json array", '["hoge",0,null,true,false]'],
-  ["empty json array", '[,,]'],
+  ["empty json array", "[,,]"],
   ["commaed json array", '{"hoge":"fuga",}'],
   ["simple json object with space", '{ "hoge": "fuga", "foo"  :  500  }'],
   ["simple json array with space", '[ "hoge" , 0 ,null ,true  , false  ]'],
