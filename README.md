@@ -1,5 +1,7 @@
 # perfect-json-parser
 
+[![JSR](https://jsr.io/badges/@gunseikpaseri/perfect-json-parser)](https://jsr.io/@gunseikpaseri/parfect-json-parser)
+
 A parser that allows editing while _maintaining the structure_ of json.
 
 - support

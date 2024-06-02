@@ -7,6 +7,9 @@ import {
   type JsonPrimitive,
 } from "./json_parser.ts";
 
+/**
+ * Perfect internal representation of json, including whitespace
+ */
 export type JSONDataInnerObj = JSONInternal;
 
 function stringifyJson(
@@ -54,6 +57,10 @@ function stringifyJson(
 
 type JSONArray = JSONValue[];
 type JSONObject = { [key: string]: JSONValue };
+
+/**
+ * javascript object types compatible with json
+ */
 export type JSONValue =
   | JSONArray
   | JSONObject
@@ -81,7 +88,7 @@ function generateJsonObj(
       case "object": {
         return Object.fromEntries(
           jsonobj.item.map((item) =>
-            item.type === "pair" ? [item.key, item.value] : []
+            item.type === "pair" ? [item.key, generateJsonObj(item.value)] : []
           ),
         );
       }
@@ -147,6 +154,7 @@ function getJsonObj(
       return undefined;
     }
     const value = parent.item[key];
+    if(value === undefined) return undefined
     return value.type === "value" ? value.value : undefined;
   } else {
     const value = findObj(parent, keys[keys.length - 1]);
@@ -286,7 +294,7 @@ export class JSONData {
   /**
    * edit json value
    * @param keys json key list
-   * @param value
+   * @param new value
    */
   edit(keys: (string | number)[], value: JSONValue) {
     const parent = getJsonParentObj(this.jsonobj, keys);
@@ -319,6 +327,17 @@ export class JSONData {
         targetObj.value = fromJsonObj(value);
       }
     }
+  }
+
+  /**
+   * get javascript object
+   * @param keys json key list
+   * @returns javascript object
+   */
+  get(keys: (string | number)[]) {
+    const value = getJsonObj(this.jsonobj, keys);
+    if(value === undefined) return undefined
+    return generateJsonObj(value)
   }
 }
 
