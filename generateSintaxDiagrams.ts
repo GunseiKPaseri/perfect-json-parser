@@ -8,3 +8,5 @@ const grammar = parser.getSerializedGastProductions();
 const html = createSyntaxDiagramsCode(grammar);
 
 Deno.writeTextFile("./json_syntax_diagram.html", html);
+
+console.log("generated json_syntax_diagram.html");

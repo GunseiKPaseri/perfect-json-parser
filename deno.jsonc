@@ -12,7 +12,8 @@
     ]
   },
   "tasks": {
-    "generate": "deno run --allow-write ./generateSintaxDiagrams.ts"
+    "generate": "deno run --allow-write ./generateSintaxDiagrams.ts",
+    "pre-commit": "deno fmt && deno lint && deno task generate && deno test"
   },
   "imports": {
     "@std/assert": "jsr:@std/assert@^0.225.3",

@@ -154,7 +154,7 @@ function getJsonObj(
       return undefined;
     }
     const value = parent.item[key];
-    if(value === undefined) return undefined
+    if (value === undefined) return undefined;
     return value.type === "value" ? value.value : undefined;
   } else {
     const value = findObj(parent, keys[keys.length - 1]);
@@ -334,10 +334,10 @@ export class JSONData {
    * @param keys json key list
    * @returns javascript object
    */
-  get(keys: (string | number)[]) {
+  get(keys: (string | number)[]): JSONValue {
     const value = getJsonObj(this.jsonobj, keys);
-    if(value === undefined) return undefined
-    return generateJsonObj(value)
+    if (value === undefined) return undefined;
+    return generateJsonObj(value);
   }
 }
 

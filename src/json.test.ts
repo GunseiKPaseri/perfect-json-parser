@@ -159,12 +159,12 @@ describe("success json regenerate", () => {
 });
 
 const editTestcase: {
-  message: string,
-  jsonText: string,
-  keys: (string | number)[],
-  value: JSONValue, 
-  afterValue: JSONValue,
-  afterJsonText: string,
+  message: string;
+  jsonText: string;
+  keys: (string | number)[];
+  value: JSONValue;
+  afterValue: JSONValue;
+  afterJsonText: string;
 }[] = [
   {
     message: "simple json object",
@@ -178,7 +178,7 @@ const editTestcase: {
     message: "add json object",
     jsonText: '{"hoge":"fuga","foo":"bar"}',
     keys: ["mono"],
-    value: undefined, 
+    value: undefined,
     afterValue: "piyo",
     afterJsonText: '{"hoge":"fuga","foo":"bar","mono":"piyo"}',
   },
@@ -202,14 +202,14 @@ const editTestcase: {
     message: "nested json object",
     jsonText: '{"hoge":"fuga","foo":{"bar":"piyo"}}',
     keys: ["foo"],
-    value: {bar: "piyo"},
+    value: { bar: "piyo" },
     afterValue: "piyo",
     afterJsonText: '{"hoge":"fuga","foo":"piyo"}',
   },
 ];
 
 describe("success json value", () => {
-  editTestcase.forEach(({message, jsonText, keys, value}) => {
+  editTestcase.forEach(({ message, jsonText, keys, value }) => {
     it(message, () => {
       const js = parse(jsonText);
       assertEquals(js.get(keys), value, `failed ${message}`);
@@ -218,20 +218,22 @@ describe("success json value", () => {
 });
 
 describe("success json regenerate", () => {
-  editTestcase.forEach(({message, jsonText, keys, afterValue, afterJsonText}) => {
-    it(message, () => {
-      const js = parse(jsonText);
-      js.edit(keys, afterValue);
-      assertEquals(js.stringify(), afterJsonText, `failed ${message}`);
-    });
-  });
+  editTestcase.forEach(
+    ({ message, jsonText, keys, afterValue, afterJsonText }) => {
+      it(message, () => {
+        const js = parse(jsonText);
+        js.edit(keys, afterValue);
+        assertEquals(js.stringify(), afterJsonText, `failed ${message}`);
+      });
+    },
+  );
 });
 
 const eachTestcase: {
-  message: string
-  jsonText: string
-  keys: (string | number)[]
-  xxxEdited: string
+  message: string;
+  jsonText: string;
+  keys: (string | number)[];
+  xxxEdited: string;
 }[] = [
   {
     message: "simple json object",
@@ -255,12 +257,12 @@ const eachTestcase: {
     message: "empty json array",
     jsonText: "[,,]",
     keys: [],
-    xxxEdited: '["xxx","xxx","xxx"]'
+    xxxEdited: '["xxx","xxx","xxx"]',
   },
 ];
 
 describe("success json each", () => {
-  eachTestcase.forEach(({message, jsonText, keys, xxxEdited}) => {
+  eachTestcase.forEach(({ message, jsonText, keys, xxxEdited }) => {
     it(message, () => {
       const js = parse(jsonText);
       js.eachPatch(keys, (_) => "xxx");
