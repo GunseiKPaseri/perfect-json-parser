@@ -1,6 +1,7 @@
 # perfect-json-parser
 
-[![JSR](https://jsr.io/badges/@gunseikpaseri/perfect-json-parser)](https://jsr.io/@gunseikpaseri/parfect-json-parser)
+[![JSR](https://jsr.io/badges/@gunseikpaseri/perfect-json-parser)](https://jsr.io/@gunseikpaseri/perfect-json-parser)
+[![GitHub](https://img.shields.io/github/license/GunseiKPaseri/perfect-json-parser)](https://github.com/GunseiKPaseri/perfect-json-parser/blob/main/LICENSE)
 
 A parser that allows editing while _maintaining the structure_ of json.
 
@@ -8,8 +9,7 @@ A parser that allows editing while _maintaining the structure_ of json.
 - support order retenation ( minimal change )
 - support comment (jsonc)
 
-> [!WARNING]
-> unsupport json5
+> [!WARNING] unsupport json5
 
 ## Usage
 
