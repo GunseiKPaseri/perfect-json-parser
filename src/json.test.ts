@@ -148,6 +148,14 @@ const tinyTestcase: [string, string][] = [
   ["commaed json array", '{"hoge":"fuga",}'],
   ["simple json object with space", '{ "hoge": "fuga", "foo"  :  500  }'],
   ["simple json array with space", '[ "hoge" , 0 ,null ,true  , false  ]'],
+  [
+    "json with comment",
+    '{ "hoge": /* hoge */ "fuga", // fuga \n "foo"  :  500  }',
+  ],
+  [
+    "array with comment",
+    '[ "hoge" /* hoge */ , 0 ,null ,true  , false  ]//hogege\n',
+  ],
 ];
 
 describe("success json regenerate", () => {

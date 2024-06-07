@@ -6,10 +6,10 @@ A parser that allows editing while _maintaining the structure_ of json.
 
 - support
 - support order retenation ( minimal change )
+- support comment (jsonc)
 
 > [!WARNING]
->
-> - unsupport comment
+> unsupport json5
 
 ## Usage
 

@@ -9,6 +9,11 @@ const LSquare = createToken({ name: "LSquare", pattern: /\[/, label: "'['" });
 const RSquare = createToken({ name: "RSquare", pattern: /]/, label: "']'" });
 const Comma = createToken({ name: "Comma", pattern: /,/, label: "','" });
 const Colon = createToken({ name: "Colon", pattern: /:/, label: "':'" });
+const CommentBlock = createToken({
+  name: "CommentBlock",
+  pattern: /\/\*.*?\*\//,
+});
+const CommentLine = createToken({ name: "CommentLine", pattern: /\/\/.*?\n/ });
 const StringLiteral = createToken({
   name: "StringLiteral",
   pattern: /"(?:[^\\"]|\\(?:[bfnrtv"\\/]|u[0-9a-fA-F]{4}))*"/,
@@ -32,6 +37,8 @@ const jsonTokens = [
   RSquare,
   Comma,
   Colon,
+  CommentBlock,
+  CommentLine,
   True,
   False,
   Null,
@@ -218,7 +225,15 @@ export class JsonParser extends EmbeddedActionsParser {
     ]));
 
   public ignoredText: () => string = this.RULE("ignoredText", () => {
-    const space = this.OPTION4(() => this.CONSUME4(WhiteSpace).image);
-    return space ?? "";
+    const space: string[] = [];
+
+    this.MANY(() =>
+      this.OR([
+        { ALT: () => space.push(this.CONSUME(WhiteSpace).image) },
+        { ALT: () => space.push(this.CONSUME(CommentBlock).image) },
+        { ALT: () => space.push(this.CONSUME(CommentLine).image) },
+      ])
+    );
+    return space.join("");
   });
 }

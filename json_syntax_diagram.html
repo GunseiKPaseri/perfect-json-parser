@@ -325,15 +325,50 @@
     "orgText": "",
     "definition": [
       {
-        "type": "Option",
-        "idx": 4,
+        "type": "Repetition",
+        "idx": 0,
         "definition": [
           {
-            "type": "Terminal",
-            "name": "WhiteSpace",
-            "label": "WhiteSpace",
-            "idx": 4,
-            "pattern": "\\s+"
+            "type": "Alternation",
+            "idx": 0,
+            "definition": [
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "Terminal",
+                    "name": "WhiteSpace",
+                    "label": "WhiteSpace",
+                    "idx": 0,
+                    "pattern": "\\s+"
+                  }
+                ]
+              },
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "Terminal",
+                    "name": "CommentBlock",
+                    "label": "CommentBlock",
+                    "idx": 0,
+                    "pattern": "\\/\\*.*?\\*\\/"
+                  }
+                ]
+              },
+              {
+                "type": "Alternative",
+                "definition": [
+                  {
+                    "type": "Terminal",
+                    "name": "CommentLine",
+                    "label": "CommentLine",
+                    "idx": 0,
+                    "pattern": "\\/\\/.*?\\n"
+                  }
+                ]
+              }
+            ]
           }
         ]
       }
